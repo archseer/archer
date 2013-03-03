@@ -44,8 +44,9 @@ class Window
     glDisable(GL_LIGHTING)
     # Disable dithering
     glDisable(GL_DITHER)
-    # Disable blending (for now)
-    glDisable(GL_BLEND)
+    # Enable blending (alpha transparency)
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     glEnable GL_TEXTURE_2D # Use 2D textures
   end

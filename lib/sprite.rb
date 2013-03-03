@@ -11,6 +11,22 @@ class Sprite
     @y = 0
     @z = 0
 
+    @opacity = 1.0
+  end
+
+  def opacity
+    @opacity
+  end
+
+  def opacity=(val)
+    raise ArgumentError, "val is not a Float!" unless val.is_a? Float
+    if val < 0.0
+      @opacity = 0.0
+    elsif val > 1.0
+      @opacity = 1.0
+    else
+      @opacity = val
+    end
   end
 
   def draw # optimize to VBO (lazyfoo #16-#20)
@@ -19,6 +35,7 @@ class Sprite
     glBindTexture GL_TEXTURE_2D, @bitmap.texture_id
 
     glBegin GL_QUADS do
+      glColor4f(1.0, 1.0, 1.0, @opacity) # set alpha opacity
       glTexCoord2f(0.0, 0.0)
       glVertex(@x, @y,  @z)
       glTexCoord2f(0.0, 1.0)
