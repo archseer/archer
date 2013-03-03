@@ -1,10 +1,11 @@
 require 'opengl'
 require 'glfw'
 
+require_relative 'fps_counter'
 require_relative 'sprite'
 require_relative 'gl_buffer'
 
-include Gl,Glfw
+include Gl, Glfw
 
 # Note: z-index doesn't work.
 
@@ -20,36 +21,10 @@ class Window
 
     setup
 
-    @sprite = Sprite.new('crate.png')
-    @sprites = []
-    2000.times do
-      @sprites << Sprite.new('crate.png')
-    end
+    @fps = FPS.new
 
     glfwSetWindowTitle(title)
-
-    @start_time = glfwGetTime
-
-    keyfun = lambda do |key,action|
-      if action != GLFW_PRESS
-        next
-      end
-
-      case key
-      when GLFW_KEY_UP
-        @sprite.y -= 4
-      when GLFW_KEY_DOWN
-        @sprite.y += 4
-      when GLFW_KEY_LEFT
-        @sprite.x -= 4
-      when GLFW_KEY_RIGHT
-        @sprite.x += 4
-      end
-
-    end
-    glfwSetKeyCallback( keyfun )
     glfwEnable(GLFW_KEY_REPEAT)
-
     #glfwSwapInterval(0)
   end
 
@@ -85,34 +60,17 @@ class Window
 
     glfwSetWindowCloseCallback(close_callback)
 
-    frame_count = 0
-
     while $running
 
-      current_time = glfwGetTime
-
-      #Calculate and display FPS (frames per second)
-      if (current_time - @start_time) > 1
-        frame_rate = frame_count / (current_time - @start_time);
-        glfwSetWindowTitle "Spinning Triangle #{"%d.3" % frame_rate} FPS)"
-        @start_time = current_time
-
-        frame_count = 0
-      else
-        frame_count = frame_count + 1
-      end
+      glfwSetWindowTitle("FPS: #{"%d.3" % @fps.calc}")
 
       glClear GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT
       glMatrixMode GL_MODELVIEW
       glLoadIdentity
 
-      @sprite.draw
-      @sprites.each do |sprite|
-        sprite.draw
-      end
+      update
 
       glfwSwapBuffers
-      #sleep 0.01  # to avoid consuming all CPU power
     end
   end
 
@@ -121,6 +79,3 @@ class Window
   end
 
 end
-
-@window = Window.new
-@window.show
