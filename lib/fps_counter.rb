@@ -1,4 +1,3 @@
-
 class FPS
   def initialize(interval = 1.0)
     @interval = interval

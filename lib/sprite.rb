@@ -2,7 +2,7 @@ require_relative 'bitmap'
 
 class Sprite
   attr_accessor :x, :y, :z
-  
+
   def initialize(filename)
 
     @bitmap = Bitmap.load(filename)

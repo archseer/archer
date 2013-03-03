@@ -38,7 +38,7 @@ class Window_Test < Window
   end
 
   def update
-    
+
     @sprites.each do |sprite|
       sprite.draw
     end

@@ -1,6 +1,6 @@
 class Buffer
   attr_reader :id
-  
+
   def initialize(id=nil)
     @id = id || glGenBuffers(1).first
   end
