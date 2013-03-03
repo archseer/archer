@@ -29,7 +29,7 @@ class Sprite
     end
   end
 
-  def draw # optimize to VBO (lazyfoo #16-#20)
+  def draw # optimize to VBO (lazyfoo #16-#19)
     glLoadIdentity
 
     glBindTexture GL_TEXTURE_2D, @bitmap.texture_id

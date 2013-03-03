@@ -14,6 +14,8 @@ glfwInit
 class Window
 
   def initialize(title='Window', width=0, height=0)
+    glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, GL_TRUE)
+    
     if glfwOpenWindow(width, height, 0,0,0,0, 0,0, GLFW_WINDOW ) == false
       raise "Unable to open window!"
       exit
