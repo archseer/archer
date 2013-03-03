@@ -31,6 +31,7 @@ class Bitmap
 
   def dispose
     glDeleteTextures(@texture_id)
+    @texture_id = nil
   end
 
   def disposed?

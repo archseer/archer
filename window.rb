@@ -1,6 +1,7 @@
 require 'opengl'
 require 'glfw'
 
+require_relative 'sprite'
 require_relative 'gl_buffer'
 
 include Gl,Glfw
@@ -88,7 +89,7 @@ class Window
 
     while $running
 
-      current_time = glfwGetTime()
+      current_time = glfwGetTime
 
       #Calculate and display FPS (frames per second)
       if (current_time - @start_time) > 1
@@ -110,8 +111,8 @@ class Window
         sprite.draw
       end
 
-      glfwSwapBuffers()
-      sleep 0.01  # to avoid consuming all CPU power
+      glfwSwapBuffers
+      #sleep 0.01  # to avoid consuming all CPU power
     end
   end
 
@@ -120,8 +121,6 @@ class Window
   end
 
 end
-
-require_relative 'sprite'
 
 @window = Window.new
 @window.show
