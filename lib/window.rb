@@ -50,6 +50,13 @@ class Window
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
+    # Depth testing is useful in 3D OpenGL applications where if you render
+    # something and then render something that's behind it, the object that's
+    # behind won't raster it's polygons over the object that's in front because
+    # the depth is tested first. The reason we disable depth testing is when you
+    # mix blending and depth testing you get funky results.
+    glDisable(GL_DEPTH_TEST)
+
     glEnable GL_TEXTURE_2D # Use 2D textures
   end
 
