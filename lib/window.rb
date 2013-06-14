@@ -1,8 +1,10 @@
 require 'opengl'
 require 'glfw'
 
+require_relative 'input'
 require_relative 'fps_counter'
 require_relative 'sprite'
+require_relative 'tilemap'
 require_relative 'gl_buffer'
 
 include Gl, Glfw
@@ -27,6 +29,7 @@ class Window
 
     glfwSetWindowTitle(title)
     glfwEnable(GLFW_KEY_REPEAT)
+    glfwSetKeyCallback(Input.method(:glfw_callback).to_proc) # hacky convert method to proc
     #glfwSwapInterval(0)
   end
 

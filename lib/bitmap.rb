@@ -5,7 +5,7 @@ class Bitmap
 
   @@index = {} # Index of all our textures
 
-  private_class_method :new
+  private_class_method :new # disallow bypass of load
 
   # Either use a cached texture or load a new one
   def self.load(filename)
