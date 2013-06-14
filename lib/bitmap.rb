@@ -1,4 +1,5 @@
 require 'chunky_png'
+require 'oily_png'
 
 class Bitmap
   attr_reader :height, :width, :texture_id
